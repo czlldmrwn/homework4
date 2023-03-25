@@ -5,6 +5,8 @@
 package com.mycompany.homework4;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -23,24 +25,30 @@ public class Homework4 {
         words.add(new Dictionary("delinquent", "преступник"));
         words.add(new Dictionary("friend", "друг"));
         Scanner scan = new Scanner(System.in);
-        List<Dictionary> newWords = new ArrayList<>();
-        System.out.println("Введите слово:");
-        String newWord = scan.nextLine();
-        System.out.println("Введите перевод:");
-        String newTranslate = scan.nextLine();
-        for (Dictionary d : words) {
-            if (newWord.equalsIgnoreCase(d.getWord())) {
-                if (newTranslate.equalsIgnoreCase(d.getTranslate())) {
-                     System.out.println("Этот перевод данного слова уже есть в словаре!");   
-                } else {
-                    newTranslate = d.getTranslate() + "; " + newTranslate;
+        System.out.println("Сколько слов вы хотите добваить?");
+        int n = scan.nextInt();
+        scan.nextLine();
+        for (int i = 1; i <= n; i++) {
+            System.out.println("Введите слово:");
+            String newWord = scan.nextLine();
+            System.out.println("Введите перевод:");
+            String newTranslate = scan.nextLine();
+            Iterator <Dictionary> iter = words.iterator();
+            while (iter.hasNext()) {
+                Dictionary d = iter.next();
+                if (newWord.equalsIgnoreCase(d.getWord())) {
+                    if (newTranslate.equalsIgnoreCase(d.getTranslate())) {
+                         System.out.println("Этот перевод данного слова уже есть в словаре!");   
+                    } else {
+                        newTranslate = d.getTranslate() + "; " + newTranslate;
+                        iter.remove();
                     }
-            } else {
-                newWords.add(new Dictionary(d.getWord(), d.getTranslate()));
+                }
             }
+           words.add(new Dictionary(newWord, newTranslate));
         }
-        newWords.add(new Dictionary(newWord, newTranslate));
-        for (Dictionary w : newWords) {
+        Collections.sort(words);
+        for (Dictionary w : words) {
             System.out.println(w.getWord() + " - " + w.getTranslate());
         }
     }
