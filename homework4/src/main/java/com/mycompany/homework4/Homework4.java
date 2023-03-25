@@ -25,7 +25,7 @@ public class Homework4 {
         words.add(new Dictionary("delinquent", "преступник"));
         words.add(new Dictionary("friend", "друг"));
         Scanner scan = new Scanner(System.in);
-        System.out.println("Сколько слов вы хотите добваить?");
+        System.out.println("Сколько слов вы хотите добавить?");
         int n = scan.nextInt();
         scan.nextLine();
         for (int i = 1; i <= n; i++) {
@@ -38,7 +38,8 @@ public class Homework4 {
                 Dictionary d = iter.next();
                 if (newWord.equalsIgnoreCase(d.getWord())) {
                     if (newTranslate.equalsIgnoreCase(d.getTranslate())) {
-                         System.out.println("Этот перевод данного слова уже есть в словаре!");   
+                         System.out.println("Этот перевод данного слова уже есть в словаре!");
+                         iter.remove();
                     } else {
                         newTranslate = d.getTranslate() + "; " + newTranslate;
                         iter.remove();
